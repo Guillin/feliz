@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feliz cumpleaños, Daniela 🎂</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Nunito:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noche:#170A2B; --ciruela:#2E1250; --rosa:#F6A9C6; --rosa-claro:#FFE3EE;
+  --oro:#F7D58B; --papel:#FFF6F9; --tinta:#3A1B45;
+  --serif:'Fraunces',Georgia,serif; --sans:'Nunito',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--noche);color:var(--rosa-claro);line-height:1.7;overflow-x:hidden}
+canvas#estrellas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+canvas#confeti{position:fixed;inset:0;width:100%;height:100%;z-index:50;pointer-events:none}
+main{position:relative;z-index:1}
+section{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4rem 1.5rem;text-align:center}
+h1,h2{font-family:var(--serif);font-weight:300;line-height:1.05}
+:focus-visible{outline:3px solid var(--oro);outline-offset:4px}
+
+/* Portada */
+#portada h1{font-size:clamp(3rem,13vw,8.5rem);font-style:italic;letter-spacing:-.02em;color:var(--papel)}
+#portada h1 span{display:block;font-weight:600;font-style:normal;color:var(--rosa);font-size:1.15em}
+#portada p{margin-top:1.5rem;font-size:1.15rem;max-width:30ch;opacity:.85}
+.boton{margin-top:2.5rem;font:600 1rem var(--sans);padding:.9rem 2.2rem;border-radius:999px;border:1.5px solid var(--oro);background:transparent;color:var(--oro);cursor:pointer;transition:background .25s,color .25s}
+.boton:hover{background:var(--oro);color:var(--noche)}
+.entrada{animation:sube 1.6s .2s both cubic-bezier(.2,.7,.2,1)}
+@keyframes sube{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+/* Pastel */
+#pastel h2{font-size:clamp(2rem,6vw,3.4rem);color:var(--papel);max-width:16ch}
+#pastel .sub{margin-top:.8rem;opacity:.8}
+.pastel{width:min(300px,78vw);margin:2.5rem auto 1rem;display:block;overflow:visible}
+#llama{cursor:pointer;transform-origin:150px 62px;animation:llama 1.4s ease-in-out infinite alternate}
+#llama:focus-visible{outline:none}
+#llama:focus-visible ellipse{stroke:var(--oro);stroke-width:2}
+@keyframes llama{from{transform:scale(1,1) rotate(-2deg)}to{transform:scale(1.06,1.12) rotate(2deg)}}
+.apagada #llama{display:none}
+#humo{opacity:0}
+.apagada #humo{animation:humo 3s ease-out forwards}
+@keyframes humo{0%{opacity:.7;transform:translateY(0)}100%{opacity:0;transform:translateY(-50px)}}
+#deseo{min-height:3.5em;font-family:var(--serif);font-style:italic;font-size:1.5rem;color:var(--oro);opacity:0;transition:opacity 1.2s}
+.apagada #deseo{opacity:1}
+
+/* Carta */
+#carta{background:linear-gradient(var(--noche),var(--ciruela) 12%,var(--ciruela) 88%,var(--noche))}
+.papel{background:var(--papel);color:var(--tinta);max-width:640px;width:100%;padding:clamp(2rem,6vw,4rem);border-radius:4px 4px 28px 4px;text-align:left;box-shadow:0 30px 60px rgba(0,0,0,.45);transform:rotate(-.8deg)}
+.papel h2{font-size:2.4rem;font-style:italic;color:#B03A6E;margin-bottom:1.5rem}
+.papel p{font-family:var(--serif);font-size:1.15rem;font-weight:350;margin-bottom:1.1rem}
+.firma{font-family:var(--serif);font-style:italic;font-size:1.6rem;color:#B03A6E;margin-top:1.5rem;text-align:right}
+
+/* Razones */
+#razones h2{font-size:clamp(2rem,6vw,3.4rem);color:var(--papel);margin-bottom:.6rem}
+#razones .sub{opacity:.75;margin-bottom:2.5rem}
+.lista{list-style:none;max-width:560px;width:100%;text-align:left}
+.lista li{border-bottom:1px solid rgba(246,169,198,.25)}
+.lista button{width:100%;display:flex;gap:1rem;align-items:baseline;background:none;border:0;color:inherit;font:inherit;text-align:left;padding:1.1rem .2rem;cursor:pointer}
+.lista .corazon{color:var(--rosa);transition:transform .3s}
+.lista .t{font-family:var(--serif);font-size:1.35rem;font-weight:400;flex:1}
+.lista .d{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s}
+.lista .d>div{overflow:hidden;opacity:.85;padding-left:2rem}
+.lista .d p{padding-bottom:1.1rem}
+.lista li.abierta .d{grid-template-rows:1fr}
+.lista li.abierta .corazon{transform:scale(1.4)}
+
+/* Tiempo */
+.fotos{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem;margin-top:3rem}
+.fotos figure{background:var(--papel);padding:.6rem .6rem 2rem;width:min(210px,70vw);box-shadow:0 14px 30px rgba(0,0,0,.4)}
+.fotos figure:nth-child(odd){transform:rotate(-3deg)}
+.fotos figure:nth-child(even){transform:rotate(2.5deg)}
+.fotos img{width:100%;aspect-ratio:1;object-fit:cover;display:block}
+footer{position:relative;z-index:1;text-align:center;padding:5rem 1.5rem 6rem;font-family:var(--serif);font-style:italic;font-size:1.6rem;color:var(--rosa)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<canvas id="estrellas" aria-hidden="true"></canvas>
+<canvas id="confeti" aria-hidden="true"></canvas>
+
+<main>
+  <section id="portada">
+    <h1 class="entrada">Feliz cumpleaños<span id="nombre">Daniela</span></h1>
+    <p class="entrada">Este es mi regalo para ti</p>
+    <button class="boton entrada" id="abrir">Abrir tu regalo</button>
+  </section>
+
+  <section id="pastel">
+    <h2>Antes de seguir, pide un deseo</h2>
+    <p class="sub">Toca la llama para apagar la vela</p>
+    <svg class="pastel" viewBox="0 0 300 260" role="img" aria-label="Pastel de cumpleaños con una vela encendida">
+      <ellipse cx="150" cy="238" rx="135" ry="14" fill="#000" opacity=".3"/>
+      <rect x="40" y="150" width="220" height="86" rx="14" fill="#F6A9C6"/>
+      <path d="M40 168c20 22 40-6 60 12s40-8 60 10 40-14 60 6 30-8 40-4v-42H40z" fill="#FFF6F9"/>
+      <rect x="62" y="108" width="176" height="60" rx="12" fill="#C9568A"/>
+      <path d="M62 124c18 18 36-4 54 10s36-6 54 8 36-10 54 4 12-2 14-2v-16H62z" fill="#FFF6F9"/>
+      <circle cx="90" cy="198" r="6" fill="#F7D58B"/><circle cx="150" cy="210" r="6" fill="#F7D58B"/><circle cx="210" cy="198" r="6" fill="#F7D58B"/>
+      <circle cx="108" cy="146" r="5" fill="#F7D58B"/><circle cx="192" cy="146" r="5" fill="#F7D58B"/>
+      <rect x="143" y="68" width="14" height="42" rx="3" fill="#F7D58B"/>
+      <path d="M143 80l14 6M143 92l14 6" stroke="#C9568A" stroke-width="3"/>
+      <g id="humo"><path d="M150 60c-8-10 8-16 0-28" stroke="#FFF6F9" stroke-width="3" fill="none" stroke-linecap="round"/></g>
+      <g id="llama" role="button" tabindex="0" aria-label="Apagar la vela">
+        <ellipse cx="150" cy="50" rx="15" ry="26" fill="#F7D58B" opacity=".35"/>
+        <ellipse cx="150" cy="54" rx="8" ry="16" fill="#FFB347"/>
+        <ellipse cx="150" cy="58" rx="4" ry="9" fill="#FFF6F9"/>
+      </g>
+    </svg>
+    <p id="deseo">Que cada deseo tuyo se cumpla. 💖</p>
+  </section>
+
+  <section id="carta">
+    <article class="papel">
+      <h2 id="saludo"></h2>
+      <div id="textoCarta"></div>
+      <p class="firma" id="firma"></p>
+    </article>
+  </section>
+
+  <section id="razones">
+    <h2>Lo que me encanta de ti</h2>
+    <p class="sub">Toca cada corazón</p>
+    <ul class="lista" id="lista"></ul>
+  </section>
+
+  <section id="tiempo">
+    <div class="fotos" id="fotos"></div>
+  </section>
+</main>
+
+<footer>Te quiero mucho Nany. Feliz cumpleaños ✨</footer>
+
+<script>
+
+const CONFIG = {
+  nombre: "Daniela",
+  tuNombre: "Jesus",            
+  carta: [
+    "Hoy quiero que te detengas un momento y sepas que te quiero mucho.",
+    "Gracias por tu forma de reír me emboba cuando la escucho aunque no te vea, por tu paciencia conmigo y por hacer que mis dias sean mas bonitos.",
+    "Que este nuevo año de vita te otorgue muchas alegrias y todo lo bonito que mereces. Me encantaria estar ahí para verlo aunque no me creas."
+  ],
+  razones: [
+    ["Tu risa", "Aunque no te vea esa risa tuya me encanta."],
+    ["Cómo me haces sentir", "Contigo puedo ser yo sin necesidad de forzar nada"],
+    ["Tu corazón", "Aunque te las tiras de dura se que eres un amor"],
+    ["Tu Humor", "Siempre me haces reir, aunque a veces sea a costa de mi. Hp jaja"],
+  ],
+  fotos: [
+    "lobo.jpeg",
+  ]
+};
+/* ============================================================ */
+
+// Textos
+document.getElementById('nombre').textContent = CONFIG.nombre;
+document.getElementById('saludo').textContent = " " + CONFIG.nombre + ",";
+document.getElementById('textoCarta').innerHTML = CONFIG.carta.map(p => "<p>" + p + "</p>").join("");
+document.getElementById('firma').textContent = "Con todo mi cariño, " + CONFIG.tuNombre;
+
+// Razones desplegables
+const lista = document.getElementById('lista');
+CONFIG.razones.forEach(([t, d]) => {
+  const li = document.createElement('li');
+  li.innerHTML = '<button aria-expanded="false"><span class="corazon">♥</span><span class="t"></span></button><div class="d"><div><p></p></div></div>';
+  li.querySelector('.t').textContent = t;
+  li.querySelector('p').textContent = d;
+  const b = li.querySelector('button');
+  b.addEventListener('click', () => {
+    const abierta = li.classList.toggle('abierta');
+    b.setAttribute('aria-expanded', abierta);
+    if (abierta) confeti(b.getBoundingClientRect().left + 20, b.getBoundingClientRect().top + 20, 14, true);
+  });
+  lista.appendChild(li);
+});
+
+// Fotos
+const cont = document.getElementById('fotos');
+CONFIG.fotos.forEach(src => {
+  const f = document.createElement('figure');
+  f.innerHTML = '<img alt="Un recuerdo de nosotros" loading="lazy">';
+  f.querySelector('img').src = src;
+  cont.appendChild(f);
+});
+
+document.getElementById('abrir').addEventListener('click', () => {
+  confeti(innerWidth / 2, innerHeight / 2, 60);
+  document.getElementById('pastel').scrollIntoView({ behavior: 'smooth' });
+});
+
+// Vela
+const pastel = document.getElementById('pastel'), llama = document.getElementById('llama');
+function apagar() {
+  if (pastel.classList.contains('apagada')) return;
+  pastel.classList.add('apagada');
+  confeti(innerWidth / 2, innerHeight * .45, 140);
+  setTimeout(() => document.getElementById('carta').scrollIntoView({ behavior: 'smooth' }), 4200);
+}
+llama.addEventListener('click', apagar);
+llama.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); apagar(); } });
+
+// Estrellas de fondo
+const ce = document.getElementById('estrellas'), xe = ce.getContext('2d');
+let estrellas = [];
+function ajustar() {
+  ce.width = innerWidth; ce.height = innerHeight;
+  estrellas = Array.from({ length: Math.min(120, Math.floor(innerWidth * innerHeight / 9000)) }, () => ({
+    x: Math.random() * ce.width, y: Math.random() * ce.height, r: Math.random() * 1.4 + .3, f: Math.random() * 6.28, v: Math.random() * .02 + .005
+  }));
+}
+addEventListener('resize', ajustar); ajustar();
+const calma = matchMedia('(prefers-reduced-motion:reduce)').matches;
+(function dibujar() {
+  xe.clearRect(0, 0, ce.width, ce.height);
+  estrellas.forEach(s => {
+    s.f += s.v;
+    xe.globalAlpha = .35 + .65 * Math.abs(Math.sin(s.f));
+    xe.fillStyle = "#FFE3EE";
+    xe.beginPath(); xe.arc(s.x, s.y, s.r, 0, 6.28); xe.fill();
+  });
+  if (!calma) requestAnimationFrame(dibujar);
+})();
+
+// Confeti
+const cc = document.getElementById('confeti'), xc = cc.getContext('2d');
+let piezas = [], corriendo = false;
+const colores = ["#F6A9C6", "#F7D58B", "#FFF6F9", "#C9568A", "#B79CFF"];
+function confeti(x, y, n, corazones) {
+  if (calma) return;
+  cc.width = innerWidth; cc.height = innerHeight;
+  for (let i = 0; i < n; i++) {
+    const ang = Math.random() * 6.28, vel = Math.random() * 9 + 3;
+    piezas.push({ x, y, vx: Math.cos(ang) * vel, vy: Math.sin(ang) * vel - 5, g: .22, c: colores[i % colores.length], t: Math.random() * 6 + 4, a: Math.random() * 6.28, va: Math.random() * .3 - .15, vida: 1, h: corazones });
+  }
+  if (!corriendo) { corriendo = true; requestAnimationFrame(animar); }
+}
+function animar() {
+  xc.clearRect(0, 0, cc.width, cc.height);
+  piezas = piezas.filter(p => p.vida > 0 && p.y < cc.height + 20);
+  piezas.forEach(p => {
+    p.vx *= .985; p.vy += p.g; p.x += p.vx; p.y += p.vy; p.a += p.va; p.vida -= .006;
+    xc.save(); xc.globalAlpha = Math.max(p.vida, 0); xc.translate(p.x, p.y); xc.rotate(p.a); xc.fillStyle = p.c;
+    if (p.h) { xc.font = p.t * 2.5 + "px serif"; xc.fillText("♥", 0, 0); } else xc.fillRect(-p.t / 2, -p.t / 4, p.t, p.t / 2);
+    xc.restore();
+  });
+  if (piezas.length) requestAnimationFrame(animar); else { corriendo = false; xc.clearRect(0, 0, cc.width, cc.height); }
+}
+</script>
+</body>
+</html>
